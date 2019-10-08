@@ -10,7 +10,7 @@ const Row = (props) => {
         key={`${x}-${y}`}
         y={y}
         x={x}
-        onChangeValue={props.handleChangeCell}
+        onChangedValue={props.handleChangedCell}
         updateCells={props.updateCells}
         value={props.rowData[x] || ''}
       />

@@ -10,7 +10,7 @@ class Table extends React.Component {
     }
   }
 
-  handleChangeCell = ({ x, y }, value) => {
+  handleChangedCell = ({ x, y }, value) => {
     const modifiedData = Object.assign({}, this.state.data)
     if (!modifiedData[y]) modifiedData[y] = {}
     modifiedData[y][x] = value
@@ -28,7 +28,7 @@ class Table extends React.Component {
       const rowData = this.state.data[y] || {}
       rows.push(
         <Row
-          handleChangeCell={this.handleChangeCell}
+          handleChangedCell={this.handleChangedCell}
           updateCells={this.updateCells}
           key={y}
           y={y}
