@@ -9,6 +9,8 @@ class Table extends React.Component {
     this.state = {
       data: {}
     }
+    this.tableIdentifier = `tableData-${props.id}`
+
     this.parser = new FormulaParser()
 
     // When a formula contains a cell value, this event lets us hook and return
@@ -82,6 +84,19 @@ class Table extends React.Component {
     if (!modifiedData[y]) modifiedData[y] = {}
     modifiedData[y][x] = value
     this.setState({ data: modifiedData })
+
+    if (window && window.localStorage) {
+      window.localStorage.setItem(this.tableIdentifier, JSON.stringify(modifiedData))
+    }
+  }
+
+  componentWillMount() {
+    if (this.props.saveToLocalStorage && window && window.localStorage) {
+      const data = window.localStorage.getItem(this.tableIdentifier)
+      if (data) {
+        this.setState({ data: JSON.parse(data) })
+      }
+    }
   }
 
   updateCells = () => {
